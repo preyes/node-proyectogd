@@ -1,0 +1,42 @@
+extends layout 
+
+block contenido
+    .container.p-5
+        h1 #{nombrePagina}
+        h2 #{e}
+        
+        if errores
+            each error in errores 
+                .alerta= error.texto
+        .container.p-4
+            form.card.card-body(action="/nuevo-auto" method="POST")                                  
+                    .form-group
+                        label(for="nombre") Marca
+                        input(type="text" id="marca" class="form-control" name="marca" placeholder = "Marca" autofocus required)
+                    .form-group
+                        label(for="nombre") Modelo
+                        input(type="text" id="modelo" class="form-control" name="modelo" placeholder = "Modelo" autofocus required)
+                    .form-group    
+                        label(for="nombre") Año
+                        input(type="text" id="año" class="form-control" name="año" placeholder = "Año" autofocus required)
+                    .form-group
+                        input(type="submit" value="Agregar" class="btn btn-primary" )
+                        
+
+
+        table.table.table-dark.table-striped.p-5
+            tr
+                th Marca
+                th Modelo
+                th Año
+                th                
+
+            each n in autos
+                tr
+                    td= n.marca
+                    td= n.modelo
+                    td= n.año
+                    td
+                        a(class='button' href='/borrar/'+ n.id) Borrar
+
+        
